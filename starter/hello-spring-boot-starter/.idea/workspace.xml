@@ -20,6 +20,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -48,6 +51,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -130,14 +134,14 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1237" height="260" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1664366360844" />
-    <state x="142" y="0" key="SettingsEditor" timestamp="1664365264041">
+    <state x="142" y="0" key="SettingsEditor" timestamp="1664366593036">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1664365264041" />
-    <state x="325" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1664364837582">
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1664366593036" />
+    <state x="325" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1664366573757">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1664364837582" />
+    <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1664366573756" />
     <state x="49" y="35" key="new project wizard" timestamp="1664365259750">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
