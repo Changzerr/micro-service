@@ -1,0 +1,7 @@
+cn\changzer\config\HelloServiceAutoConfiguration.class
+cn\changzer\config\MyLogInterceptor.class
+cn\changzer\config\HelloProperties.class
+cn\changzer\service\HelloService.class
+META-INF\spring-configuration-metadata.json
+cn\changzer\config\MyLogAutoConfiguration.class
+cn\changzer\log\MyLog.class

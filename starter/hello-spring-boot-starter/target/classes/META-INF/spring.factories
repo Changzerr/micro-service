@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.changzer.config.HelloServiceAutoConfiguration,\
+  cn.changzer.config.MyLogAutoConfiguration
