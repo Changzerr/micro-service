@@ -38,6 +38,7 @@
     </option>
   </component>
   <component name="ProjectId" id="2FOYw9Eo1Zl8STNFtQLyo2x6Zyt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -91,6 +92,7 @@
       <option name="presentableId" value="Default" />
       <updated>1664364833556</updated>
       <workItem from="1664364837575" duration="1509000" />
+      <workItem from="1664366568963" duration="666000" />
     </task>
     <servers />
   </component>
@@ -102,6 +104,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="446" y="50" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1664366064787" />
+    <state x="442" y="95" key="FileChooserDialogImpl" timestamp="1664368110055">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="442" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1664368110055" />
     <state width="1237" height="260" key="GridCell.Tab.0.bottom" timestamp="1664366360846">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -142,9 +148,9 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="325" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1664366573756" />
-    <state x="49" y="35" key="new project wizard" timestamp="1664365259750">
+    <state x="49" y="35" key="new project wizard" timestamp="1664368123810">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="49" y="35" key="new project wizard/0.0.1280.680@0.0.1280.680" timestamp="1664365259750" />
+    <state x="49" y="35" key="new project wizard/0.0.1280.680@0.0.1280.680" timestamp="1664368123810" />
   </component>
 </project>
