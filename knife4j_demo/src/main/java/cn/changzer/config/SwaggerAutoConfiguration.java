@@ -26,7 +26,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Configuration
-@ConditionalOnProperty(name = "pinda.swagger.enabled", havingValue = "true",
+@ConditionalOnProperty(name = "changzer.swagger.enabled", havingValue = "true",
                        matchIfMissing = true)
 @EnableSwagger2
 @EnableConfigurationProperties(SwaggerProperties.class)
