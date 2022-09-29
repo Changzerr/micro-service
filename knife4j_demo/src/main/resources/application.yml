@@ -1,0 +1,12 @@
+server:
+  port: 7788
+pinda:
+  swagger:
+    enabled: true #是否启用swagger
+    docket:
+      user:
+        title: 用户模块
+        base-package: cn.changzer.controller.user
+      menu:
+        title: 菜单模块
+        base-package: cn.changzer.controller.menu

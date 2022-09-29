@@ -19,7 +19,7 @@ public class SwaggerAutoConfiguration {
                 .apiInfo(apiInfo())//.groupName("用户接口组")
                 .select()
                 //为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("cn.changzer.controller"))
+                .apis(RequestHandlerSelectors.basePackage("cn.cn.changzer.controller"))
                 .build();
         return docket;
     }
@@ -30,7 +30,7 @@ public class SwaggerAutoConfiguration {
     //            .apiInfo(apiInfo()).groupName("菜单接口组")
     //            .select()
     //            //为当前包路径
-    //            .apis(RequestHandlerSelectors.basePackage("cn.changzer.controller.menu"))
+    //            .apis(RequestHandlerSelectors.basePackage("cn.cn.changzer.controller.menu"))
     //            .build();
     //    return docket;
     //}
