@@ -5,7 +5,6 @@ import cn.changzer.wrapper.XssRequestWrapper;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-
 /*
 *过滤所有提交到服务器的请求参数
 */

@@ -9,10 +9,12 @@ public class XssRequestWrapper extends HttpServletRequestWrapper {
     /*
      * 策略文件 需要将要使用的策略文件放到项目资源文件路径下
     */
-    private static String antiSamyPath = XssRequestWrapper.class.getClassLoader()
-            .getResource( "antisamy-test.xml").getFile();
+    //private static String antiSamyPath = XssRequestWrapper.class.getClassLoader()
+    //        .getResource( "antisamy-test.xml").getFile();
 
-    public static Policy policy = null;
+    private static String antiSamyPath = "src/main/resources/antisamy-test.xml";
+
+    public static  Policy policy = null;
     static {
         // 指定策略文件
         try {
@@ -61,4 +63,5 @@ public class XssRequestWrapper extends HttpServletRequestWrapper {
         }
         return newArray;
     }
+
 }
