@@ -135,7 +135,7 @@ public class JwtTest {
     @Test
     public void test4() throws Exception{
         //自定义 随机密码,  请修改这里
-        String password = "itcast";
+        String password = "changzer";
 
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
         SecureRandom secureRandom = new SecureRandom(password.getBytes());
@@ -145,7 +145,7 @@ public class JwtTest {
         byte[] publicKeyBytes = keyPair.getPublic().getEncoded();
         byte[] privateKeyBytes = keyPair.getPrivate().getEncoded();
 
-        FileUtil.writeBytes(publicKeyBytes, "d:\\pub.key");
-        FileUtil.writeBytes(privateKeyBytes, "d:\\pri.key");
+        FileUtil.writeBytes(publicKeyBytes, "E:\\学习\\web微服务\\资料-品达通用权限系统\\微服务学习\\jwt\\jwt_demo\\pub.key");
+        FileUtil.writeBytes(privateKeyBytes, "E:\\学习\\web微服务\\资料-品达通用权限系统\\微服务学习\\jwt\\jwt_demo\\pri.key");
     }
 }
