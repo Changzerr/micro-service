@@ -14,7 +14,7 @@ public class LogBackTest {
     @Test
     public void test1(){
         Logger logger = LoggerFactory.getLogger("cn.changzer.logback.HelloWorld");
-        //默认debug级别
+        //默认debug级别，从root logger 继承而来
         logger.trace("trace ...");
         logger.debug("debug ...");
         logger.info("info ...");
