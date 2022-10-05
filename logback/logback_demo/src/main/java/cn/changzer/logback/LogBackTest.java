@@ -47,7 +47,7 @@ public class LogBackTest {
     //测试默认的日志输出级别
     @Test
     public void test3(){
-        Logger logger = LoggerFactory.getLogger("cn.itcast.logback.HelloWorld");
+        Logger logger = LoggerFactory.getLogger("cn.changzer.logback.HelloWorld");
         logger.error("error ...");
         logger.warn("warn ...");
         logger.info("info ...");
@@ -59,7 +59,7 @@ public class LogBackTest {
     //设置日志输出级别
     @Test
     public void test4(){
-        ch.qos.logback.classic.Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger("cn.itcast.logback.HelloWorld");
+        ch.qos.logback.classic.Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger("cn.changzer.logback.HelloWorld");
         logger.setLevel(Level.WARN);
         logger.error("error ...");
         logger.warn("warn ...");
@@ -72,7 +72,7 @@ public class LogBackTest {
     @Test
     public void test5(){
         ch.qos.logback.classic.Logger logger =
-                (ch.qos.logback.classic.Logger) LoggerFactory.getLogger("cn.itcast");
+                (ch.qos.logback.classic.Logger) LoggerFactory.getLogger("cn.changzer");
         logger.setLevel(Level.INFO);
         logger.error("error ...");
         logger.warn("warn ...");
@@ -81,10 +81,18 @@ public class LogBackTest {
         logger.trace("trace ...");
 
         // "cn.itcast.logback" 会继承 "cn.itcast" 的有效级别
-        Logger barLogger = LoggerFactory.getLogger("cn.itcast.logback");
+        Logger barLogger = LoggerFactory.getLogger("cn.changzer.logback");
         // 这条日志会打印，因为 INFO >= INFO
         barLogger.info("子级信息");
         // 这条日志不会打印，因为 DEBUG < INFO
         barLogger.debug("子级调试信息");
+    }
+
+    //Logger获取，根据同一个名称获得的logger都是同一个实例
+    @Test
+    public void test6(){
+        Logger logger1 = LoggerFactory.getLogger("cn.itcast");
+        Logger logger2 = LoggerFactory.getLogger("cn.itcast");
+        System.out.println(logger1 == logger2);
     }
 }
