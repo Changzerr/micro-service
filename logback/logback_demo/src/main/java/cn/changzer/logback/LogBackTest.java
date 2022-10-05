@@ -91,8 +91,15 @@ public class LogBackTest {
     //Logger获取，根据同一个名称获得的logger都是同一个实例
     @Test
     public void test6(){
-        Logger logger1 = LoggerFactory.getLogger("cn.itcast");
-        Logger logger2 = LoggerFactory.getLogger("cn.itcast");
+        Logger logger1 = LoggerFactory.getLogger("cn.changzer");
+        Logger logger2 = LoggerFactory.getLogger("cn.changzer");
         System.out.println(logger1 == logger2);
+    }
+
+    //参数化日志
+    @Test
+    public void test7(){
+        Logger logger = LoggerFactory.getLogger("cn.changzer");
+        logger.debug("hello {}","world");
     }
 }
