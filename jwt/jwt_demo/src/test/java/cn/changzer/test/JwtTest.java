@@ -62,12 +62,12 @@ public class JwtTest {
                         .setHeader(headMap)
                         .setClaims(body)
                         .setId("jwt001")
-            			.signWith(SignatureAlgorithm.HS256,"itcast")
+            			.signWith(SignatureAlgorithm.HS256,"changzer")
             			.compact();
         System.out.println(jwt);
 
         //解析jwt
-        Jwt result = Jwts.parser().setSigningKey("itcast").parse(jwt);
+        Jwt result = Jwts.parser().setSigningKey("changzer").parse(jwt);
         Object jwtBody = result.getBody();
         Header header = result.getHeader();
 
