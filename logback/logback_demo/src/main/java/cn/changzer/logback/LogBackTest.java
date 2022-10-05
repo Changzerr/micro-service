@@ -1,5 +1,6 @@
 package cn.changzer.logback;
 
+import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.core.util.StatusPrinter;
 import org.junit.Test;
@@ -52,6 +53,18 @@ public class LogBackTest {
         logger.info("info ...");
         logger.debug("debug ...");
         //因为默认的输出级别为debug，所以这一条日志不会输出
+        logger.trace("trace ...");
+    }
+
+    //设置日志输出级别
+    @Test
+    public void test4(){
+        ch.qos.logback.classic.Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger("cn.itcast.logback.HelloWorld");
+        logger.setLevel(Level.WARN);
+        logger.error("error ...");
+        logger.warn("warn ...");
+        logger.info("info ...");
+        logger.debug("debug ...");
         logger.trace("trace ...");
     }
 }
