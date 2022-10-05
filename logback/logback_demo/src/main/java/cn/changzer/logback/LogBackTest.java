@@ -67,4 +67,24 @@ public class LogBackTest {
         logger.debug("debug ...");
         logger.trace("trace ...");
     }
+
+    //测试Logger的继承
+    @Test
+    public void test5(){
+        ch.qos.logback.classic.Logger logger =
+                (ch.qos.logback.classic.Logger) LoggerFactory.getLogger("cn.itcast");
+        logger.setLevel(Level.INFO);
+        logger.error("error ...");
+        logger.warn("warn ...");
+        logger.info("info ...");
+        logger.debug("debug ...");
+        logger.trace("trace ...");
+
+        // "cn.itcast.logback" 会继承 "cn.itcast" 的有效级别
+        Logger barLogger = LoggerFactory.getLogger("cn.itcast.logback");
+        // 这条日志会打印，因为 INFO >= INFO
+        barLogger.info("子级信息");
+        // 这条日志不会打印，因为 DEBUG < INFO
+        barLogger.debug("子级调试信息");
+    }
 }
