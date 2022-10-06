@@ -1,4 +1,4 @@
-package cn.changzer.controller;
+package cn.itcast.controller;
 
 import net.oschina.j2cache.CacheChannel;
 import net.oschina.j2cache.CacheObject;
@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 使用j2catch提供的CacheChannel对象操作缓存数据
+ */
 @RestController
 @RequestMapping("/cache")
-public class MyController {
+public class UserController {
     private String key = "myKey";
     private String region="rx";
     @Autowired
@@ -20,6 +23,7 @@ public class MyController {
 
     @GetMapping("/getInfos")
     public List<String> getInfos(){
+        //从缓存中获取数据，需要指定区域region和key
         CacheObject cacheObject = cacheChannel.get(region, key);
         if(cacheObject.getValue() == null){
             //缓存中没有找到，查询数据库获得
@@ -40,24 +44,24 @@ public class MyController {
         return "evict success";
     }
 
-    //检测存在那级缓存
-    @GetMapping("/check")
-    public String check(){
-        int check = cacheChannel.check(region, key);
-        return "level:" + check;
-    }
-
-    //检测缓存数据是否存在
-    @GetMapping("/exists")
-    public String exists(){
-        boolean exists = cacheChannel.exists(region, key);
-        return "exists:" + exists;
-    }
-
-    //清理指定区域的缓存
+    //清理指定区域中的所有缓存
     @GetMapping("/clear")
     public String clear(){
         cacheChannel.clear(region);
         return "clear success";
+    }
+
+    //检查指定的缓存数据是否存在
+    @GetMapping("/exists")
+    public boolean exists(){
+        boolean exists = cacheChannel.exists(region, key);
+        return exists;
+    }
+
+    //检查指定的缓存数据是从哪一级缓存获取到的
+    @GetMapping("/check")
+    public String check(){
+        int level = cacheChannel.check(region, key);
+        return "level:" + level;
     }
 }
