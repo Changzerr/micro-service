@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    com.itheima.pinda.log.LogAutoConfiguration
+    com.changzer.pinda.log.LogAutoConfiguration
 org.springframework.context.ApplicationContextInitializer=\
-    com.itheima.pinda.log.init.ApplicationLoggerInitializer
+    com.changzer.pinda.log.init.ApplicationLoggerInitializer

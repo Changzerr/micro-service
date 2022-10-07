@@ -1,6 +1,6 @@
-import com.itheima.pinda.auth.utils.JwtHelper;
-import com.itheima.pinda.auth.utils.JwtUserInfo;
-import com.itheima.pinda.auth.utils.Token;
+import com.changzer.pinda.auth.utils.JwtHelper;
+import com.changzer.pinda.auth.utils.JwtUserInfo;
+import com.changzer.pinda.auth.utils.Token;
 
 /**
  * jwt 生成和解析 测试类
