@@ -1,7 +1,6 @@
 package com.changzer.pinda.authority.config;
 
-import com.changzer.pinda.authority.biz.service.auth.OptLogService;
-import com.changzer.pinda.authority.entity.common.OptLog;
+import com.changzer.pinda.authority.biz.service.common.OptLogService;
 import com.changzer.pinda.log.entity.OptLogDTO;
 import com.changzer.pinda.log.event.SysLogListener;
 import org.springframework.context.annotation.Bean;
