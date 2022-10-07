@@ -1,5 +1,6 @@
 package com.changzer.pinda.authority.controller.auth;
 
+import com.changzer.pinda.authority.biz.service.auth.ResourceService;
 import com.changzer.pinda.authority.biz.service.auth.ValidateCodeService;
 import com.changzer.pinda.authority.biz.service.auth.impl.AuthManager;
 import com.changzer.pinda.authority.dto.auth.LoginDTO;
@@ -30,6 +31,7 @@ public class LoginController extends BaseController {
     private ValidateCodeService validateCodeService;
     @Autowired
     private AuthManager authManager;
+
 
 
     @ApiOperation(notes = "验证码", value="验证码")
