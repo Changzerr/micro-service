@@ -36,7 +36,7 @@ import java.util.List;
 @Configuration
 @Slf4j
 @MapperScan(
-        basePackages = {"com.itheima.pinda",},
+        basePackages = {"com.changzer.pinda",},
         annotationClass = Repository.class,
         sqlSessionFactoryRef = AuthorityDatabaseAutoConfiguration.DATABASE_PREFIX + "SqlSessionFactory")
 @EnableConfigurationProperties({MybatisPlusProperties.class, DatabaseProperties.class})

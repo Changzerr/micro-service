@@ -3,7 +3,7 @@
 # 如：复制到pd-auth-server-dev.yml中将数据库名和ip改掉
 pinda:
   mysql:
-    ip: 127.0.0.1
+    ip: localhost
     port: 3306
     driverClassName: com.mysql.cj.jdbc.Driver
     database: pd_auth
@@ -19,7 +19,7 @@ spring:
       username: ${pinda.mysql.username}
       password: ${pinda.mysql.password}
       driver-class-name: ${pinda.mysql.driverClassName}
-      url: jdbc:mysql://${pinda.mysql.ip}:${pinda.mysql.port}/${pinda.mysql.database}?serverTimezone=CTT&characterEncoding=utf8&useUnicode=true&useSSL=false&autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+      url: jdbc:mysql://${pinda.mysql.ip}:${pinda.mysql.port}/${pinda.mysql.database}?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false&autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
       db-type: mysql
       initialSize: 10
       minIdle: 10
