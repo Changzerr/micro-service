@@ -6459,7 +6459,7 @@ public class AuthManager {
                 .eq(User::getAccount, account));
 
         // 密码加密
-        String passwordMd5 = DigestUtils.md5Hex(password);
+            String passwordMd5 = DigestUtils.md5Hex(password);
 
         if (user == null || !user.getPassword().equals(passwordMd5)) {
             return R.fail(ExceptionCode.JWT_USER_INVALID);
