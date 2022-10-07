@@ -1,9 +1,13 @@
 package com.changzer.pinda.authority.biz.service.auth.impl;
-
+import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
 import com.changzer.pinda.authority.biz.service.auth.ValidateCodeService;
 import com.changzer.pinda.common.constant.CacheKey;
 import com.changzer.pinda.exception.BizException;
 import com.wf.captcha.ArithmeticCaptcha;
+import com.wf.captcha.ChineseCaptcha;
+import com.wf.captcha.GifCaptcha;
+import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.base.Captcha;
 import net.oschina.j2cache.CacheChannel;
 import net.oschina.j2cache.CacheObject;
@@ -12,16 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
 /**
- * @author lingqu
- * @date 2022/10/7
- * @apiNote
+ * 验证码服务
  */
-
 @Service
 public class ValidateCodeServiceImpl implements ValidateCodeService {
     @Autowired
@@ -32,7 +29,7 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
         if (StringUtils.isBlank(key)) {
             throw BizException.validFail("验证码key不能为空");
         }
-
+        //setHeader(response, "arithmetic");
         response.setContentType(MediaType.IMAGE_PNG_VALUE);
         response.setHeader(HttpHeaders.PRAGMA, "No-cache");
         response.setHeader(HttpHeaders.CACHE_CONTROL, "No-cache");
@@ -46,25 +43,45 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
     }
 
     @Override
-    public boolean check(String key, String code) {
-        if(StringUtils.isEmpty(key)){
-            throw BizException.validFail("验证码key不能为空");
+    public boolean check(String key, String value) {
+        if (StringUtils.isBlank(value)) {
+            throw BizException.validFail("请输入验证码");
         }
-
-        //根据key从缓存中获取验证码
         CacheObject cacheObject = cache.get(CacheKey.CAPTCHA, key);
         if (cacheObject.getValue() == null) {
-            throw BizException.validFail("验证码已经过期");
+            throw BizException.validFail("验证码已过期");
         }
-
-        //比对验证码
-        String codeInCache = (String) cacheObject.getValue();
-        if(!codeInCache.equals(code)){
-            throw BizException.validFail("验证码错误");
+        if (!StringUtils.equalsIgnoreCase(value, String.valueOf(cacheObject.getValue()))) {
+            throw BizException.validFail("验证码不正确");
         }
-
-        //校验成功，清除验证码
+        //验证通过，立即从缓存中删除验证码
         cache.evict(CacheKey.CAPTCHA, key);
         return true;
+    }
+
+    private Captcha createCaptcha(String type) {
+        Captcha captcha = null;
+        if (StringUtils.equalsIgnoreCase(type, "gif")) {
+            captcha = new GifCaptcha(115, 42, 4);
+        } else if (StringUtils.equalsIgnoreCase(type, "png")) {
+            captcha = new SpecCaptcha(115, 42, 4);
+        } else if (StringUtils.equalsIgnoreCase(type, "arithmetic")) {
+            captcha = new ArithmeticCaptcha(115, 42);
+        } else if (StringUtils.equalsIgnoreCase(type, "chinese")) {
+            captcha = new ChineseCaptcha(115, 42);
+        }
+        captcha.setCharType(2);
+        return captcha;
+    }
+
+    private void setHeader(HttpServletResponse response, String type) {
+        if (StringUtils.equalsIgnoreCase(type, "gif")) {
+            response.setContentType(MediaType.IMAGE_GIF_VALUE);
+        } else {
+            response.setContentType(MediaType.IMAGE_PNG_VALUE);
+        }
+        response.setHeader(HttpHeaders.PRAGMA, "No-cache");
+        response.setHeader(HttpHeaders.CACHE_CONTROL, "No-cache");
+        response.setDateHeader(HttpHeaders.EXPIRES, 0L);
     }
 }
