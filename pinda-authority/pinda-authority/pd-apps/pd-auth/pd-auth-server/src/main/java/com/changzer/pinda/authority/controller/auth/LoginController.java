@@ -7,6 +7,7 @@ import com.changzer.pinda.authority.dto.auth.LoginDTO;
 import com.changzer.pinda.authority.dto.auth.LoginParamDTO;
 import com.changzer.pinda.base.BaseController;
 import com.changzer.pinda.base.R;
+import com.changzer.pinda.log.annotation.SysLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +37,14 @@ public class LoginController extends BaseController {
 
     @ApiOperation(notes = "验证码", value="验证码")
     @GetMapping(value = "/captcha", produces = "image/png")
+    @SysLog("生成验证码")
     public void captcha(@RequestParam("key") String key, HttpServletResponse response) throws IOException {
         validateCodeService.create(key,response);
     }
 
     @ApiOperation(notes = "登录", value="登录")
     @PostMapping("/login")
+    @SysLog("登录")
     public R<LoginDTO> login(@Validated @RequestBody LoginParamDTO loginParamDTO){
         //校验验证码
         boolean check = validateCodeService.check(loginParamDTO.getKey(), loginParamDTO.getCode());
