@@ -7,13 +7,13 @@ pinda:
     docket:
       auth:
         title: 权限模块
-        base-package: com.itheima.pinda.authority.controller.auth
+        base-package: com.changzer.pinda.authority.controller.auth
       common:
         title: 公共模块
-        base-package: com.itheima.pinda.authority.controller.common
+        base-package: com.changzer.pinda.authority.controller.common
       core:
         title: 组织岗位模块
-        base-package: com.itheima.pinda.authority.controller.core
+        base-package: com.changzer.pinda.authority.controller.core
 
 authentication:
   user:

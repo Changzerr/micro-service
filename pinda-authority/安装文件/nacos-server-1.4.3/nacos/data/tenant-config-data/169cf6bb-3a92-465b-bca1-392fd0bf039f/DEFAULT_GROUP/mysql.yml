@@ -8,7 +8,7 @@ pinda:
     driverClassName: com.mysql.cj.jdbc.Driver
     database: pd_auth
     username: root
-    password: root
+    password: 2784247628
   database:
     isBlockAttack: false  # 是否启用 攻击 SQL 阻断解析器
 
@@ -59,7 +59,7 @@ mybatis-plus:
   mapper-locations:
     - classpath*:mapper_**/**/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: com.itheima.pinda.*.entity;com.itheima.pinda.database.mybatis.typehandler
+  typeAliasesPackage: com.changzer.pinda.*.entity;com.changzer.pinda.database.mybatis.typehandler
   global-config:
     db-config:
       id-type: INPUT
