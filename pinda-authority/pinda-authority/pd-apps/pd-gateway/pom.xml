@@ -42,9 +42,14 @@
             <artifactId>pd-tools-jwt</artifactId>
         </dependency>
         <!--感觉网关服务中没有使用到j2cache，所以先注释掉，看看有没有问题-->
+<!--        <dependency>-->
+<!--            <groupId>com.itheima</groupId>-->
+<!--            <artifactId>pd-tools-j2cache</artifactId>-->
+<!--        </dependency>-->
+        <!--redis依赖-->
         <dependency>
-            <groupId>com.itheima</groupId>
-            <artifactId>pd-tools-j2cache</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <!--<dependency>
             <groupId>com.itheima</groupId>

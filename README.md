@@ -7132,7 +7132,7 @@ public class TokenContextFilter extends BaseFilter {
     @Override
     public String filterType() {
         // 前置过滤器
-        return PRE_TYPE;
+            return PRE_TYPE;
     }
 
     /**
