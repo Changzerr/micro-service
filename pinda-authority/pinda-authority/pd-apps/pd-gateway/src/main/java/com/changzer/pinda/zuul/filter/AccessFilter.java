@@ -1,15 +1,16 @@
-package com.changzer.pinda.zuul.config;
+package com.changzer.pinda.zuul.filter;
 
 import cn.hutool.core.util.StrUtil;
 import com.changzer.pinda.authority.dto.auth.ResourceQueryDTO;
 import com.changzer.pinda.authority.entity.auth.Resource;
 import com.changzer.pinda.base.R;
 import com.changzer.pinda.common.constant.CacheKey;
+import com.changzer.pinda.common.redis.RedisCache;
 import com.changzer.pinda.context.BaseContextConstants;
 import com.changzer.pinda.exception.code.ExceptionCode;
 import com.changzer.pinda.zuul.api.ResourceApi;
 import com.changzer.pinda.zuul.filter.BaseFilter;
-import com.changzer.pinda.zuul.utils.RedisCache;
+//import com.changzer.pinda.zuul.utils.RedisCache;
 import com.netflix.zuul.context.RequestContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

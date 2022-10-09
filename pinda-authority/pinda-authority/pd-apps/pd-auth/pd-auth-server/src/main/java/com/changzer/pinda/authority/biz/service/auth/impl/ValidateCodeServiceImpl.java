@@ -1,16 +1,16 @@
 package com.changzer.pinda.authority.biz.service.auth.impl;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletResponse;
 import com.changzer.pinda.authority.biz.service.auth.ValidateCodeService;
 import com.changzer.pinda.common.constant.CacheKey;
+import com.changzer.pinda.common.redis.RedisCache;
 import com.changzer.pinda.exception.BizException;
 import com.wf.captcha.ArithmeticCaptcha;
 import com.wf.captcha.ChineseCaptcha;
 import com.wf.captcha.GifCaptcha;
 import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.base.Captcha;
-import net.oschina.j2cache.CacheChannel;
-import net.oschina.j2cache.CacheObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ValidateCodeServiceImpl implements ValidateCodeService {
     @Autowired
-    private CacheChannel cache;
+    private RedisCache redisCache;
 
     @Override
     public void create(String key, HttpServletResponse response) throws IOException {
@@ -37,8 +37,8 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
 
         Captcha captcha = new ArithmeticCaptcha(115, 42);
         captcha.setCharType(2);
-
-        cache.set(CacheKey.CAPTCHA, key, StringUtils.lowerCase(captcha.text()));
+        redisCache.setCacheObject(CacheKey.CAPTCHA+":"+key,StringUtils.lowerCase(captcha.text()),5, TimeUnit.MINUTES);
+        //cache.set(CacheKey.CAPTCHA, key, StringUtils.lowerCase(captcha.text()));
         captcha.out(response.getOutputStream());
     }
 
@@ -47,15 +47,17 @@ public class ValidateCodeServiceImpl implements ValidateCodeService {
         if (StringUtils.isBlank(value)) {
             throw BizException.validFail("请输入验证码");
         }
-        CacheObject cacheObject = cache.get(CacheKey.CAPTCHA, key);
-        if (cacheObject.getValue() == null) {
+        String cacheObject = redisCache.getCacheObject(CacheKey.CAPTCHA + ":" + key);
+        //CacheObject cacheObject = cache.get(CacheKey.CAPTCHA, key);
+        if (cacheObject == null) {
             throw BizException.validFail("验证码已过期");
         }
-        if (!StringUtils.equalsIgnoreCase(value, String.valueOf(cacheObject.getValue()))) {
+        if (!StringUtils.equalsIgnoreCase(value, String.valueOf(cacheObject))) {
             throw BizException.validFail("验证码不正确");
         }
         //验证通过，立即从缓存中删除验证码
-        cache.evict(CacheKey.CAPTCHA, key);
+        redisCache.deleteObject(CacheKey.CAPTCHA+":"+ key);
+        //cache.evict(CacheKey.CAPTCHA, key);
         return true;
     }
 

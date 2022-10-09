@@ -13,16 +13,17 @@ import com.changzer.pinda.authority.entity.auth.Resource;
 import com.changzer.pinda.authority.entity.auth.User;
 import com.changzer.pinda.base.R;
 import com.changzer.pinda.common.constant.CacheKey;
+import com.changzer.pinda.common.redis.RedisCache;
 import com.changzer.pinda.dozer.DozerUtils;
 import com.changzer.pinda.exception.code.ExceptionCode;
 import lombok.extern.slf4j.Slf4j;
-import net.oschina.j2cache.CacheChannel;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -42,7 +43,7 @@ public class AuthManager {
     @Autowired
     private ResourceService resourceService;
     @Autowired
-    private CacheChannel cacheChannel;
+    private RedisCache redisCache;
 
     public R<LoginDTO> login(String account, String password) {
         //校验账号密码是否正确
@@ -68,7 +69,8 @@ public class AuthManager {
             List<String> canResource = visibleResource.stream().map((resource) -> {
                 return resource.getMethod() + resource.getUrl();
             }).collect(Collectors.toList());
-            cacheChannel.set(CacheKey.USER_RESOURCE, user.getId().toString(), canResource);
+            redisCache.setCacheList(CacheKey.USER_RESOURCE+":"+ user.getId(),canResource,2, TimeUnit.HOURS);
+            //cacheChannel.set(CacheKey.USER_RESOURCE, user.getId().toString(), canResource);
         }
 
         //封装返回结果

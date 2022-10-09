@@ -11,13 +11,13 @@ import com.changzer.pinda.authority.entity.auth.RoleAuthority;
 import com.changzer.pinda.authority.entity.auth.UserRole;
 import com.changzer.pinda.authority.enumeration.auth.AuthorizeType;
 import com.changzer.pinda.common.constant.CacheKey;
+import com.changzer.pinda.common.redis.RedisCache;
 import com.changzer.pinda.database.mybatis.conditions.Wraps;
 import com.changzer.pinda.utils.NumberHelper;
 import com.changzer.pinda.authority.biz.dao.auth.RoleAuthorityMapper;
 import com.changzer.pinda.authority.biz.service.auth.RoleAuthorityService;
 import com.changzer.pinda.authority.biz.service.auth.UserRoleService;
 import lombok.extern.slf4j.Slf4j;
-import net.oschina.j2cache.CacheChannel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 /**
@@ -32,7 +32,7 @@ public class RoleAuthorityServiceImpl extends ServiceImpl<RoleAuthorityMapper, R
     @Autowired
     private ResourceService resourceService;
     @Autowired
-    private CacheChannel cache;
+    private RedisCache redisCache;
 
     @Override
     public boolean saveUserRole(UserRoleSaveDTO userRole) {
@@ -49,7 +49,8 @@ public class RoleAuthorityServiceImpl extends ServiceImpl<RoleAuthorityMapper, R
         //清除 用户拥有的资源列表
         userRole.getUserIdList().forEach((userId) -> {
             String key = CacheKey.buildKey(userId);
-            cache.evict(CacheKey.USER_RESOURCE, key);
+            redisCache.deleteObject(CacheKey.USER_RESOURCE+":"+key);
+            //cache.evict(CacheKey.USER_RESOURCE, key);
         });
         return true;
     }
@@ -98,7 +99,8 @@ public class RoleAuthorityServiceImpl extends ServiceImpl<RoleAuthorityMapper, R
                 (userId) -> NumberHelper.longValueOf0(userId));
         userIdList.stream().collect(Collectors.toSet()).forEach((userId) -> {
             log.info("清理了 {} 的菜单/资源", userId);
-            cache.evict(CacheKey.USER_RESOURCE, String.valueOf(userId));
+            redisCache.deleteObject(CacheKey.USER_RESOURCE+":"+String.valueOf(userId));
+            //cache.evict(CacheKey.USER_RESOURCE, String.valueOf(userId));
         });
 
         return true;

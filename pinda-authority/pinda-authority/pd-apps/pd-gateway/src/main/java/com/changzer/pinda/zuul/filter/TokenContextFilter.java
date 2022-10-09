@@ -1,4 +1,4 @@
-package com.changzer.pinda.zuul.config;
+package com.changzer.pinda.zuul.filter;
 
 /**
  * @author lingqu

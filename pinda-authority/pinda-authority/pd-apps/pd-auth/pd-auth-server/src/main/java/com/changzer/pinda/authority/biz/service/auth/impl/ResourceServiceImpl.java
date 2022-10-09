@@ -7,12 +7,12 @@ import com.changzer.pinda.authority.dto.auth.ResourceQueryDTO;
 import com.changzer.pinda.authority.entity.auth.Resource;
 import com.changzer.pinda.base.id.CodeGenerate;
 import com.changzer.pinda.common.constant.CacheKey;
+import com.changzer.pinda.common.redis.RedisCache;
 import com.changzer.pinda.database.mybatis.conditions.Wraps;
 import com.changzer.pinda.exception.BizException;
 import com.changzer.pinda.utils.StrHelper;
 import com.changzer.pinda.authority.biz.dao.auth.ResourceMapper;
 import lombok.extern.slf4j.Slf4j;
-import net.oschina.j2cache.CacheChannel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements ResourceService {
     @Autowired
-    private CacheChannel cache;
+    private RedisCache redisCache;
     @Autowired
     private CodeGenerate codeGenerate;
     /**

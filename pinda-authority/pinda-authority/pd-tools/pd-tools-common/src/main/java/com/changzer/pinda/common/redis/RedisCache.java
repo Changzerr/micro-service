@@ -1,4 +1,4 @@
-package com.changzer.pinda.zuul.utils;
+package com.changzer.pinda.common.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundSetOperations;
@@ -111,7 +111,18 @@ public class RedisCache
         Long count = redisTemplate.opsForList().rightPushAll(key, dataList);
         return count == null ? 0 : count;
     }
-
+    /**
+     * 缓存List数据
+     *
+     * @param key 缓存的键值
+     * @param dataList 缓存的值
+     * @param timeout 时间
+     * @param timeUnit 时间颗粒度
+     */
+    public <T> void setCacheList(final String key, final List<T> dataList, final Integer timeout, final TimeUnit timeUnit)
+    {
+        redisTemplate.opsForValue().set(key, dataList, timeout, timeUnit);
+    }
     /**
      * 获得缓存的list对象
      *

@@ -81,10 +81,10 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.itheima</groupId>
-            <artifactId>pd-tools-j2cache</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.itheima</groupId>-->
+<!--            <artifactId>pd-tools-j2cache</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.itheima</groupId>
             <artifactId>pd-tools-swagger2</artifactId>

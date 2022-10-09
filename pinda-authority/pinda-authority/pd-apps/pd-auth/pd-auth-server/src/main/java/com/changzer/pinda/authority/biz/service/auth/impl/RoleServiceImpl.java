@@ -8,12 +8,12 @@ import com.changzer.pinda.authority.dto.auth.RoleUpdateDTO;
 import com.changzer.pinda.authority.entity.auth.*;
 import com.changzer.pinda.base.id.CodeGenerate;
 import com.changzer.pinda.common.constant.CacheKey;
+import com.changzer.pinda.common.redis.RedisCache;
 import com.changzer.pinda.database.mybatis.conditions.Wraps;
 import com.changzer.pinda.dozer.DozerUtils;
 import com.changzer.pinda.utils.StrHelper;
 import com.changzer.pinda.authority.biz.dao.auth.RoleMapper;
 import lombok.extern.slf4j.Slf4j;
-import net.oschina.j2cache.CacheChannel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 /**
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements RoleService {
     @Autowired
-    private CacheChannel cache;
+    private RedisCache redisCache;
     @Autowired
     private DozerUtils dozer;
     @Autowired
@@ -47,7 +47,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             List<User> userList = userService.findUserByRoleId(roleId, null);
             if(userList != null && userList.size() > 0){
                 userList.forEach(user -> {
-                    cache.evict(CacheKey.USER_RESOURCE, user.getId().toString());
+                    redisCache.deleteObject(CacheKey.USER_RESOURCE+":"+ user.getId().toString());
+                    //cache.evict(CacheKey.USER_RESOURCE, user.getId().toString());
                 });
             }
         });
