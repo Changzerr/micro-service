@@ -69,7 +69,8 @@ public class AuthManager {
             List<String> canResource = visibleResource.stream().map((resource) -> {
                 return resource.getMethod() + resource.getUrl();
             }).collect(Collectors.toList());
-            redisCache.setCacheList(CacheKey.USER_RESOURCE+":"+ user.getId(),canResource,2, TimeUnit.HOURS);
+            redisCache.setCacheList(CacheKey.USER_RESOURCE+":"+ user.getId(),canResource);
+            redisCache.expire(CacheKey.USER_RESOURCE+":"+ user.getId(),2,TimeUnit.HOURS);
             //cacheChannel.set(CacheKey.USER_RESOURCE, user.getId().toString(), canResource);
         }
 

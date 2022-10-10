@@ -119,9 +119,10 @@ public class RedisCache
      * @param timeout 时间
      * @param timeUnit 时间颗粒度
      */
-    public <T> void setCacheList(final String key, final List<T> dataList, final Integer timeout, final TimeUnit timeUnit)
+    public <T> long setCacheList(final String key, final List<T> dataList, final Integer timeout, final TimeUnit timeUnit)
     {
-        redisTemplate.opsForValue().set(key, dataList, timeout, timeUnit);
+        Long count = redisTemplate.opsForList().rightPushAll(key, dataList, timeout, timeUnit);
+        return count == null ? 0 : count;
     }
     /**
      * 获得缓存的list对象

@@ -14,10 +14,12 @@ import com.changzer.pinda.zuul.filter.BaseFilter;
 import com.netflix.zuul.context.RequestContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_TYPE;
@@ -33,8 +35,10 @@ public class AccessFilter extends BaseFilter {
     @Autowired
     private RedisCache redisCache;
 
+
     @Autowired
     private ResourceApi resourceApi;
+
     @Override
     public String filterType() {
         return PRE_TYPE;
@@ -62,25 +66,17 @@ public class AccessFilter extends BaseFilter {
 
         RequestContext requestContext = RequestContext.getCurrentContext();
         String requestURI = requestContext.getRequest().getRequestURI();
-        //requestURI = StrUtil.subSuf(requestURI, zuulPrefix.length());
         requestURI = StrUtil.subSuf(requestURI, requestURI.indexOf("/", 2));
         String method = requestContext.getRequest().getMethod();
         String permission = method + requestURI;
 
         //从缓存中获取所有需要进行鉴权的资源
-        //CacheObject resourceNeed2AuthObject =
-        //    cacheChannel.get(CacheKey.RESOURCE,
-        //                     CacheKey.RESOURCE_NEED_TO_CHECK);
-        List<String> cacheList = redisCache.getCacheList(CacheKey.RESOURCE + ":" + CacheKey.RESOURCE_NEED_TO_CHECK);
-        List<String> resourceNeed2Auth =
-            (List<String>) cacheList;
-        if(resourceNeed2Auth == null){
+        List<String> resourceNeed2Auth = redisCache.getCacheList(CacheKey.RESOURCE + ":" + CacheKey.RESOURCE_NEED_TO_CHECK);
+        if(resourceNeed2Auth == null || resourceNeed2Auth.size()==0){
             resourceNeed2Auth = resourceApi.list().getData();
             if(resourceNeed2Auth != null){
                 redisCache.setCacheList(CacheKey.RESOURCE + ":" + CacheKey.RESOURCE_NEED_TO_CHECK,resourceNeed2Auth);
-                //cacheChannel.set(CacheKey.RESOURCE,
-                //                 CacheKey.RESOURCE_NEED_TO_CHECK,
-                //                 resourceNeed2Auth);
+                redisCache.expire(CacheKey.RESOURCE + ":" + CacheKey.RESOURCE_NEED_TO_CHECK,2, TimeUnit.HOURS);
             }
         }
         if(resourceNeed2Auth != null){
@@ -98,10 +94,9 @@ public class AccessFilter extends BaseFilter {
         String userId = requestContext.getZuulRequestHeaders().
             				get(BaseContextConstants.JWT_KEY_USER_ID);
         List<String> cacheObject = redisCache.getCacheList(CacheKey.USER_RESOURCE + ":" + userId);
-        //CacheObject cacheObject = cacheChannel.get(CacheKey.USER_RESOURCE, userId);
         List<String> userResource = cacheObject;
         // 如果从缓存获取不到当前用户的资源权限，需要查询数据库获取，然后再放入缓存
-        if(userResource == null){
+        if(userResource == null || userResource.size() == 0){
             ResourceQueryDTO resourceQueryDTO = new ResourceQueryDTO();
             resourceQueryDTO.setUserId(new Long(userId));
             //通过Feign调用服务，查询当前用户拥有的权限
@@ -111,7 +106,6 @@ public class AccessFilter extends BaseFilter {
                 userResource = userResourceList.stream().map((Resource r) -> {
                     return r.getMethod() + r.getUrl();
                 }).collect(Collectors.toList());
-                //cacheChannel.set(CacheKey.USER_RESOURCE,userId,userResource);
                 redisCache.setCacheList(CacheKey.USER_RESOURCE + ":" + userId,userResource);
             }
         }

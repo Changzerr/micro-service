@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author lingqu
@@ -25,12 +26,13 @@ public class t {
 
     @Test
     public void test(){
-        List<String> cacheList = redisCache.getCacheObject("user_resource:3");
+        //List<String> cacheList = redisCache.getCacheObject("user_resource:3");
         List<String> a = new ArrayList<>();
         a.add("aaa");
         a.add("aaa");
         redisCache.setCacheList("aa", a);
         log.info("Stirng:========");
-        log.info("Stirng:{}",cacheList);
+        List<String> aa = redisCache.getCacheList("aa");
+        log.info("Stirng:{}",aa);
     }
 }
