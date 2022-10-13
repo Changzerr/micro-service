@@ -67,6 +67,7 @@ public class AccessFilter extends BaseFilter {
         RequestContext requestContext = RequestContext.getCurrentContext();
         String requestURI = requestContext.getRequest().getRequestURI();
         requestURI = StrUtil.subSuf(requestURI, requestURI.indexOf("/", 2));
+        requestURI = StrUtil.subSuf(requestURI, requestURI.indexOf("/", 2));
         String method = requestContext.getRequest().getMethod();
         String permission = method + requestURI;
 
