@@ -21,6 +21,16 @@
         <el-input v-model="resource.name" />
       </el-form-item>
       <el-form-item
+        :label="$t('table.resource.method')"
+        prop="method"
+        @keyup.enter.native="submitForm"
+      >
+        <el-input v-model="resource.method" />
+      </el-form-item>
+      <el-form-item :label="$t('table.resource.url')" prop="url" @keyup.enter.native="submitForm">
+        <el-input v-model="resource.url" />
+      </el-form-item>
+      <el-form-item
         :label="$t('table.resource.describe')"
         prop="describe"
         @keyup.enter.native="submitForm"
@@ -87,6 +97,16 @@ export default {
           }
         ],
         name: {
+          required: true,
+          message: this.$t('rules.require'),
+          trigger: 'blur'
+        },
+        method: {
+          required: true,
+          message: this.$t('rules.require'),
+          trigger: 'blur'
+        },
+        url: {
           required: true,
           message: this.$t('rules.require'),
           trigger: 'blur'
@@ -172,6 +192,7 @@ export default {
     },
     save() {
       const that = this
+      console.log(this.resource);
       resourceApi.save(this.resource).then(response => {
         const res = response.data
         if (res.isSuccess) {

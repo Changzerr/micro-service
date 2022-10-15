@@ -182,6 +182,7 @@ public class RoleController extends BaseController {
     @PostMapping("/authority")
     @SysLog("给角色配置权限")
     public R<Boolean> saveRoleAuthority(@RequestBody RoleAuthoritySaveDTO roleAuthoritySaveDTO) {
+        log.info("RoleAuthoritySaveDTO: {}", roleAuthoritySaveDTO);
         return success(roleAuthorityService.saveRoleAuthority(roleAuthoritySaveDTO));
     }
 

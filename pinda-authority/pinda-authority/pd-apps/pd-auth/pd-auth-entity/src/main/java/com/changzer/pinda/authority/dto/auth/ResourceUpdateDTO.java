@@ -59,4 +59,18 @@ public class ResourceUpdateDTO implements Serializable {
     @Length(max = 255, message = "接口描述长度不能超过255")
     private String describe;
 
+    /**
+     * 接口方法
+     */
+    @ApiModelProperty(value = "接口方法")
+    @Length(max = 255, message = "接口方法长度不能超过255")
+    private String method;
+
+    /**
+     * 接口URL
+     */
+    @ApiModelProperty(value = "接口URL")
+    @Length(max = 255, message = "接口URL长度不能超过255")
+    private String url;
+
 }
