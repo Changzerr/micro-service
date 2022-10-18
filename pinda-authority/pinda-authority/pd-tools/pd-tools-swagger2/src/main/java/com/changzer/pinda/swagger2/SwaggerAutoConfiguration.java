@@ -272,7 +272,6 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
         Set<String> docketNames = docketOperationParameters.stream()
                 .map(SwaggerProperties.GlobalOperationParameter::getName)
                 .collect(Collectors.toSet());
-
         List<SwaggerProperties.GlobalOperationParameter> resultOperationParameters = Lists.newArrayList();
 
         if (Objects.nonNull(globalOperationParameters)) {

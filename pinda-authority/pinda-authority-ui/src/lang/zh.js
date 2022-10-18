@@ -54,7 +54,7 @@ export default {
       sex: '性别',
       status: '状态',
       mobile: '电话',
-      avatar: '头像',
+      avatar: '照片',
       workDescribe: '个人描述',
       passwordErrorLastTime: '最后一次输错密码时间',
       passwordErrorNum: '密码错误次数',
@@ -100,10 +100,16 @@ export default {
       describe: '描述'
     },
     org: {
-      name: '部门名称',
+      name: '组织名称',
+      type: '组织类型',
+      address: '地址',
+      detailAddress: '详情地址',
+      contractNumber: '联系电话',
+      manager: '负责人',
       abbreviation: '简称',
       describe: '描述',
       parentId: '上级ID',
+      parentName: '上级名称',
       sortValue: '排序',
       status: '状态'
     },
@@ -294,6 +300,37 @@ export default {
       rate: "服务费率",
       status: "状态",
       loginTime: "最后认证时间",
+      createTime: "创建时间"
+    },
+    goodsInfo: {
+      auditStatus: "审核",
+      auditStatusEnum: {
+        _0: "未审核",
+        _1: "已审核"
+      },
+      averageCost: "加权成本",
+      barCode: "国条码",
+      brandId: "品牌表id",
+      code: "商品编码",
+      color: "颜色",
+      descript: "商品描述",
+      height: "高度",
+      length: "长度",
+      name: "商品名称",
+      oneCategoryId: "一级分类id",
+      price: "商品售价",
+      productionDate: "生产日期",
+      publishStatus: "状态",
+      publishStatusEnum: {
+        _0: "下架",
+        _1: "上架"
+      },
+      shelfLife: "有效期",
+      supplierId: "商品的供应商id",
+      threeCategoryId: "三级分类id",
+      twoCategoryId: "二级分类id",
+      weight: "重量",
+      width: "宽度",
       createTime: "创建时间"
     },
     gen: {
